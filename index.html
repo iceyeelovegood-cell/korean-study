@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#127d68" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>韩语课间</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="topbar"><div class="brand"><span class="brand-mark">한</span><strong>韩语课间</strong></div><time id="todayDate"></time></header>
+  <main>
+    <section class="view active" id="view-today" aria-labelledby="todayTitle">
+      <div class="page-heading"><span class="eyebrow">今日学习</span><h1 id="todayTitle">继续向前一点</h1></div>
+      <div class="metrics" aria-label="今日进度">
+        <div><strong id="dueCount">0</strong><span>待复习</span></div>
+        <div><strong id="newCount">0</strong><span>可学新词</span></div>
+        <div><strong id="newUsed">0/20</strong><span>已学新词</span></div>
+      </div>
+      <div class="mode-switch" role="group" aria-label="学习模式"><button data-mode="review" class="selected">复习</button><button data-mode="new">新词</button></div>
+      <div class="study-panel">
+        <div class="study-meta"><span id="studyModeLabel">复习单词</span><span id="studyProgress">0 / 0</span></div>
+        <div class="progress-track"><div id="progressFill"></div></div>
+        <div class="study-card" id="studyCard" hidden>
+          <span class="source" id="cardSource"></span>
+          <strong id="cardWord"></strong>
+          <span class="answer" id="cardAnswer" hidden></span>
+          <button class="primary-button" id="revealButton">显示答案</button>
+          <div class="rating-actions" id="ratingActions" hidden><button data-rating="forgot">忘了</button><button data-rating="fuzzy">模糊</button><button data-rating="good">记得</button></div>
+        </div>
+        <div class="study-empty" id="studyEmpty" hidden><strong id="emptyTitle"></strong><p id="emptyMessage"></p></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-grammar" aria-labelledby="grammarTitle">
+      <div class="page-heading"><span class="eyebrow">语法笔记</span><h1 id="grammarTitle">语法</h1></div>
+      <label class="search-field"><span>搜索</span><input id="grammarSearch" type="search" placeholder="语法、课次或关键词" /></label>
+      <div id="grammarList" class="item-list"></div>
+    </section>
+
+    <section class="view" id="view-words" aria-labelledby="wordsTitle">
+      <div class="page-heading"><span class="eyebrow">我的词库</span><h1 id="wordsTitle">单词</h1></div>
+      <label class="search-field"><span>搜索</span><input id="wordSearch" type="search" placeholder="韩语或中文" /></label>
+      <div id="wordList" class="item-list"></div>
+    </section>
+
+    <section class="view" id="view-data" aria-labelledby="dataTitle">
+      <div class="page-heading"><span class="eyebrow">本机资料</span><h1 id="dataTitle">数据</h1></div>
+      <div class="data-stats"><div><strong id="storedWords">0</strong><span>单词</span></div><div><strong id="storedGrammar">0</strong><span>语法</span></div></div>
+      <div class="data-row"><div><strong>学习包</strong><span id="lastImport">尚未导入</span></div><label class="primary-button file-button" for="packFile">导入学习包</label><input id="packFile" type="file" accept=".json,application/json" hidden /></div>
+      <div class="data-row"><div><strong>学习进度</strong><span id="lastBackup">保存在这台设备</span></div><button class="outline-button" id="exportBackup">导出备份</button></div>
+      <div class="data-row"><div><strong>恢复备份</strong><span>替换本机学习数据</span></div><label class="outline-button file-button" for="backupFile">选择备份</label><input id="backupFile" type="file" accept=".json,application/json" hidden /></div>
+      <p class="data-notice" id="dataNotice" role="status"></p>
+    </section>
+  </main>
+  <nav class="bottom-nav" aria-label="主导航"><button class="active" data-view="today">今日</button><button data-view="grammar">语法</button><button data-view="words">词库</button><button data-view="data">数据</button></nav>
+  <div class="toast" id="toast" role="alert" hidden></div>
+</body>
+</html>
